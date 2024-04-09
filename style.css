@@ -7,7 +7,8 @@
 }
 
 .main-card{
-    height: 25em !important;
+    height: 20em !important;
+    overflow-y: auto;
 }
 .dark-subtle{
     background: #f1f7ff !important;
