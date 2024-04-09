@@ -22,3 +22,7 @@ table th{
 table td{
     font-size: 14px;
 }
+.customer-table th,
+.customer-table td{
+    border: none !important;
+}
