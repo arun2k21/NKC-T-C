@@ -1,0 +1,24 @@
+.container-fluid{
+    font-family: "Poppins", sans-serif;
+}
+.video-card{
+    height: 200px !important;
+    min-width: 300px !important;
+}
+
+.main-card{
+    height: 25em !important;
+}
+.dark-subtle{
+    background: #f1f7ff !important;
+}
+::-webkit-scrollbar{
+    width: 1px;
+}
+table th{
+    text-transform: uppercase;
+    font-size: 14px;
+}
+table td{
+    font-size: 14px;
+}
