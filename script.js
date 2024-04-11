@@ -52,6 +52,7 @@ ZOHO.CREATOR.init()
                 const input_html = `<tr>
                 <td>${i}</td>
                 <td>${order.Order_Date}</td>
+                <td>N/A</td>
                 <td>${order.Total}</td>
             </tr>`;
                 const tr = document.createElement("tr");
@@ -74,16 +75,15 @@ ZOHO.CREATOR.init()
             }
             try{
                 const tc_resp = await ZOHO.CREATOR.API.getAllRecords(config);
-                console.log(tc_resp);
                 if(tc_resp.code == 3000){
                     const tc_obj = tc_resp.data;
                     let i = 0;
                     tc_obj.forEach(tc =>{
                         i ++
-                        const inner_element = `<td>${i}</td>
+                        const inner_element = `<td class='text-center'>${i}</td>
                         <td>${tc.Title}</td>
                     <td class="text-center">
-                        <input type="checkbox" >
+                        <input type="checkbox" class='terms-condition' id='term-${i}'>
                     </td>`;
                     const tr = document.createElement("tr");
                     tr.innerHTML = inner_element;
@@ -97,5 +97,65 @@ ZOHO.CREATOR.init()
             }
             
 
+        }
+
+        document.addEventListener("click",(event)=>{
+            const alerts = document.getElementsByClassName("alert")[0];
+            if(event.target.id === "submit-btn"){
+                const check_obj = document.getElementsByClassName("terms-condition");
+                if(check_obj){
+                    const tot_check = check_obj.length;
+                    const check_arr = [...check_obj]; 
+                    const checked_count = check_arr.reduce((acc,curr)=>{
+                        if(curr.checked){
+                            acc ++
+                        }
+                        return acc;
+                    },0)
+                    if(tot_check === checked_count){
+                        acceptAgreement();
+                    }
+                    else{
+                        alerts.classList.remove("d-none");
+                    }
+                }
+            }
+            else if(event.target.id === "btn-close"){
+                alerts.classList.add("d-none");
+            }
+        })
+
+        const login_obj = async()=>{
+            const initparams = ZOHO.CREATOR.UTIL.getInitParams();
+            const login_id = initparams?initparams.loginUser:"";
+            const config = { 
+                appName : "order-management",
+                reportName : "All_Franchisees", 
+                criteria : `Email == "${login_id}"`
+            }
+            try{
+                const resp = await ZOHO.CREATOR.API.getAllRecords(config);
+                return resp.data[0];
+            }
+            catch(error){
+                console.log(error);
+            }
+        }
+        const acceptAgreement = async()=>{
+            const login_user = await login_obj();
+
+            formData = {
+                "data" : {
+                    "Terms_Conditions" : "true"
+                }
+            }
+
+            config = {
+                appName : "order-management",
+                reportName : "All_Franchisees",
+                id : login_user.ID,
+                data : formData
+            }
+             await ZOHO.CREATOR.API.updateRecord(config);
         }
         });

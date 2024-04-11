@@ -80,13 +80,14 @@
 
         <div class="col-12 mt-3">
             <div class="card main-card shadow-sm border-0">
-                <div class="w-100 p-2 fw-bold fs-5 ms-2">Purchase Details</div>
+                <div class="w-100 p-2 fw-bold fs-5 ms-2">Payment Details</div>
                 <div class="px-3 overflow-auto">
                     <table class="table text-center">
                         <thead>
                             <tr class="border-top">
                                 <th class="position-sticky top-0">S.No</th>
-                                <th class="position-sticky top-0">Date of Purchase</th>
+                                <th class="position-sticky top-0">Date of Payment</th>
+                                <th class="position-sticky top-0">Mode of Payment</th>
                                 <th class="position-sticky top-0">Amount</th>
                             </tr>
                         </thead>
@@ -105,18 +106,27 @@
         <div class="mt-2">
             <div class="row">
                 <div class="col-12">
-                    <div class="card shadow-sm border-0">
-                        <table class="table table-responsive mt-2">
-                            <thead>
-                                <tr>
-                                    <th>S.No</th>
-                                    <th class="text-start">Terms & Condition</th>
-                                    <th class="">Agree</th>
-                                </tr>
-                            </thead>
-                            <tbody id="terms">
-                            </tbody>
-                        </table>
+                    <div class="card shadow-sm border-0 px-3">
+                            <table class="table table-responsive mt-2">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th class="text-start">Terms & Condition</th>
+                                        <th class="">Agree</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="terms">
+                                </tbody>
+                            </table>
+                                <div class="alert alert-warning d-flex justify-content-between d-none" role="alert">
+                                    Please accept all the terms and conditions to submit
+                                    <button type="button" class="btn-close" id="btn-close" aria-label="Close"></button>
+                                  </div>
+                            
+                            <div class=" d-flex justify-content-center gap-2 align-items-baseline">
+                                <div><p>I confirm that I have read and accept the terms and conditions.</p></div>
+                                <div><button type="submit" class="btn btn-dark btn-sm" id="submit-btn">Agree</button></div>
+                            </div>
                     </div>
                 </div>
             </div>
